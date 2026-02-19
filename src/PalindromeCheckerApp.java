@@ -1,4 +1,4 @@
-//uc2
+//uc3
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
@@ -9,17 +9,20 @@ public class PalindromeCheckerApp {
         System.out.print("Input text: ");
         String input = sc.nextLine();
 
-        boolean flag = true;
+        String reverse = "";
 
-        for (int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                flag = false;
-                break;
-            }
+        // Iterate from last character to first
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reverse = reverse + input.charAt(i);
         }
 
-        System.out.println("Is it a Palindrome? : " + flag);
+        boolean isPalindrome = input.equals(reverse);
+
+        System.out.println("Is it a Palindrome? : " + isPalindrome);
+
         sc.close();
     }
 }
+
+
 
