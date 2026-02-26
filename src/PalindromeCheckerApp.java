@@ -1,30 +1,38 @@
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "racecar";
+        String input = "Level";
 
-        PalindromeCheckerApp obj = new PalindromeCheckerApp();
+        PalindromeStrategy strategy = new StackStrategy();
 
-        boolean result = obj.checkPalindrome(input);
+        boolean result = strategy.check(input.toLowerCase());
 
         System.out.println("Input " + input);
         System.out.println("Is Palindrome? " + result);
-    }
-
-    public boolean checkPalindrome(String input) {
-
-        int start = 0;
-        int end = input.length() - 1;
-
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
-        }
-
-        return true;
     }
 }
