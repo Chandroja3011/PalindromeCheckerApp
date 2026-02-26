@@ -2,20 +2,19 @@ interface PalindromeStrategy {
     boolean check(String input);
 }
 
-class StackStrategy implements PalindromeStrategy {
+class SimpleStrategy implements PalindromeStrategy {
 
     public boolean check(String input) {
 
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+        int start = 0;
+        int end = input.length() - 1;
 
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
                 return false;
             }
+            start++;
+            end--;
         }
 
         return true;
@@ -28,11 +27,18 @@ public class PalindromeCheckerApp {
 
         String input = "Level";
 
-        PalindromeStrategy strategy = new StackStrategy();
+        PalindromeStrategy strategy = new SimpleStrategy();
+
+        long startTime = System.nanoTime();
 
         boolean result = strategy.check(input.toLowerCase());
 
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
         System.out.println("Input " + input);
-        System.out.println("Is Palindrome? " + result);
+        System.out.println("Is Palindrome?: " + result);
+        System.out.println("ExecutionTime: " + executionTime);
     }
 }
